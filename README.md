@@ -28,21 +28,21 @@ python analyze.py \
 }
 ```
 
-    * 'number' data:
-    ```
-    'info': {
-        'mean': xxxxx,
-        'std': xxxxx,
-        "1st_quartile": xxxxx,
-        "2nd_quartile": xxxxx,
-        "3rd_quartile": xxxxx
-    }
-    ```
-    * 'choice' data:
-    ```
-    'info': {
-        'cls1': xxxxx,
-        'cls2': xxxxx,
-        ...
-    }
-    ```
+* 'number' data:
+```
+'info': {
+    'mean': xxxxx,
+    'std': xxxxx,
+    "1st_quartile": xxxxx,
+    "2nd_quartile": xxxxx,
+    "3rd_quartile": xxxxx
+}
+```
+* 'choice' data:
+```
+'info': {
+    'cls1': xxxxx,
+    'cls2': xxxxx,
+    ...
+}
+```
