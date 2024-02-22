@@ -14,7 +14,7 @@ SMK_2ND_PLACES_HR = [
     'SMK_2ND_PLACE4_HR'
 ]
 SPO_HABIT_LABEL = [
-    f'SPO_HABBIT_{i}_{j}' for i in 'ABC' 
+    f'SPO_HABIT_{i}_{j}' for i in 'ABC' 
                        for j in ['FREQ', 'HR', 'MIN']
 ]
 SPO_ANY_LABEL = [
