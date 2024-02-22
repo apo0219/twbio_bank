@@ -13,6 +13,10 @@ SMK_2ND_PLACES_HR = [
     'SMK_2ND_PLACE3_HR',
     'SMK_2ND_PLACE4_HR'
 ]
+SPO_HABIT_LABEL = [
+    f'SPO_HABBIT_{i}_{j}' for i in 'ABC' 
+                       for j in ['FREQ', 'HR', 'MIN']
+]
 SPO_ANY_LABEL = [
     f'SPO_ANY_{i}_{j}' for i in 'ABC' 
                        for j in ['FREQ', 'HR', 'MIN']
@@ -148,6 +152,21 @@ def merge_nut_last_time(df: pd.Series):
     
     return yr + mn
 
+def merge_spo_habit_time(df: pd.Series):
+    if all(map(pd.isna, df)):
+        return np.nan
+    
+    rtn = 0
+    for spo_type in ['SPO_HABIT_A', 'SPO_HABIT_B', 'SPO_HABIT_C']:
+        freq = df[f'{spo_type}_FREQ']
+        hr = df[f'{spo_type}_HR']
+        mini = df[f'{spo_type}_MIN']
+        
+        if any(map(pd.isna, [freq, hr, mini])):
+            continue
+        
+        rtn += freq * (hr * 60 + mini)
+
 def merge_spo_any_time(df: pd.Series):
     
     if all(map(pd.isna, df)):
@@ -189,6 +208,7 @@ def main(args):
     df['SMK_CURR_AMT'] = df[['SMK_CURR_FREQ', 'SMK_CURR_PKG']].apply(merge_smk_amt, axis=1)
     df['SMK_2ND_HR'] = df[SMK_2ND_PLACES_HR].apply(merge_smk_2nd_hr, axis=1)
     df['NUT_LAST_TIME'] = df[['NUT_LAST_YR', 'NUT_LAST_MN']].apply(merge_nut_last_time, axis=1)
+    df['SPO_HABIT_TIME'] = df[SPO_HABIT_LABEL].apply(merge_spo_habit_time, axis=1)
     df['SPO_ANY_TIME'] = df[SPO_ANY_LABEL].apply(merge_spo_any_time, axis=1)
     df['INCENSE_HR'] = df[INCENSE_HR_LABEL].apply(merge_incense_hr, axis=1)
     for dis in DIS_LIST:
