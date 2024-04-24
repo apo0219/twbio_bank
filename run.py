@@ -201,7 +201,11 @@ def merge_dis_fam(df: pd.Series):
         return 1
 
 def main(args):
-    df = pd.read_csv(args.csv_file)
+    df = pd.read_csv(
+        args.csv_file,
+        na_values='N',
+        keep_default_na=True
+    )
     
     df['DRK_CURR_TIME'] = df[['DRK_CURR_YR', 'DRK_CURR_MN']].apply(merge_drk_curr_time, axis=1)
     df['DRK_CURR_AMT'] = df[DRK_AMT_LABEL].apply(merge_drk_amt, axis=1)
